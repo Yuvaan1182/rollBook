@@ -11,7 +11,6 @@ const { createAuthMiddleware } = require("../middlewares/auth/auth.middleware");
 
 // Import Zod schemas
 const authSchema = require("../middlewares/zod/schemas/authSchema");
-const setupGoogleStrategy = require("../strategies/google.strategy");
 
 // Import JWT environment variables
 const jwt = require("../config/env.config").jwt;
