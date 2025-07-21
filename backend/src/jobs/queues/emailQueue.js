@@ -1,6 +1,6 @@
 const { Queue } = require('bullmq');
-const { redis } = require('../../config/env');
-const { EMAIL_QUEUE } = require('../../config/constants/queues');
+const { redis } = require('../../config/env.config');
+const { EMAIL_QUEUE } = require('../../config/constants/queue');
 
 const emailQueue = new Queue(EMAIL_QUEUE.name, {
   connection: {

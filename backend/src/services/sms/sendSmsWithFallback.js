@@ -1,5 +1,5 @@
-const { providers } = require("../../constants/smsProviders");
-const clients = require("../../lib/smsClients");
+const { providers } = require("../../config/constants/smsProviders");
+const clients = require("./providers/smsClient");
 
 async function sendSmsWithFallback(payload) {
   let lastError;

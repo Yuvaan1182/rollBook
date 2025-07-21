@@ -1,5 +1,10 @@
-const { providers } = require("../../constants/emailProviders");
-const clients = require("../../lib/emailClients");
+const { providers } = require("../../config/constants/emailProviders");
+const clients = require("./providers/emailClient");
+
+/** TODO
+ *  Add service priorities in redis
+ *  Add service on/off switch in redis
+ */
 
 async function sendEmailWithFallback(payload) {
   let lastError;
@@ -20,4 +25,5 @@ async function sendEmailWithFallback(payload) {
   throw new Error(`All email providers failed. Last error: ${lastError.message}`);
 }
 
-module.exports = { sendEmailWithFallback };
+module.exports = sendEmailWithFallback;
+

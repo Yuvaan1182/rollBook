@@ -1,12 +1,12 @@
 require("dotenv").config();
 
 const app = require("./app");
-const connectDB = require("./config/connectDB");
-const { port, nodeEnv } = require("./config/env");
-const { disconnectRedis } = require("./config/redis");
+const connectDB = require("./config/connectDB.config");
+const { port, nodeEnv } = require("./config/env.config");
+const redis = require("./config/redis.config");
 
-process.on("SIGINT", disconnectRedis);
-process.on("SIGTERM", disconnectRedis);
+process.on("SIGINT", redis.disconnect);
+process.on("SIGTERM", redis.disconnect);
 
 (async () => {
   try {
