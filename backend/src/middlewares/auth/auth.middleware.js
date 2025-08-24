@@ -11,6 +11,7 @@ const { errorResponse } = require("../../utils/response.utils");
 function createAuthMiddleware({ secret, onError } = {}) {
   return function authMiddleware(req, res, next) {
     try {
+      console.log("Auth middleware triggered for:", req.method, req.originalUrl);
       const authHeader = req.headers.authorization;
       if (!authHeader || !authHeader.startsWith("Bearer ")) {
         return errorResponse(
@@ -21,8 +22,19 @@ function createAuthMiddleware({ secret, onError } = {}) {
         );
       }
       const token = authHeader.split(" ")[1];
+      
       const decoded = jwt.verify(token, secret);
-      req.user.id = decoded.userId || decoded.id;
+      if (!decoded || !decoded.id) {
+        return errorResponse(
+          res,
+          "Invalid authentication token",
+          { message: "INVALID_AUTH_TOKEN" },
+          403
+        );
+      }
+
+      req.user = req.user || {}; // it was added to ensure req.user exists
+      req.user.id = decoded.id || decoded._id; 
       next();
     } catch (error) {
       if (onError) return onError(error, req, res, next);

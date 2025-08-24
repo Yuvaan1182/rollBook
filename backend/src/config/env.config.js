@@ -58,6 +58,18 @@ module.exports = {
       callbackURL: process.env.GITHUB_CALLBACK_URL || "/api/v1/auth/github/callback",
     },
   },
+  payments: {
+    gateway: process.env.PAYMENT_GATEWAY || "stripe",
+    stripe: {
+      secretKey: process.env.STRIPE_SECRET_KEY,
+      webhookSecret: process.env.STRIPE_WEBHOOK_SECRET_KEY,
+      apiVersion: process.env.STRIPE_API_VERSION || "2025-07-10",
+      publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
+      webhookSigningSecret: process.env.STRIPE_WEBHOOK_SIGNING_SECRET,
+      mode: process.env.STRIPE_MODE || "test",
+      apiBaseUrl: process.env.STRIPE_API_BASE || "https://api.stripe.com/v1",
+    },
+  },
   smsProvider: process.env.SMS_PROVIDER || "twilio",
 
   // Third-party API base URLs

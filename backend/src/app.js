@@ -14,22 +14,21 @@ const isProd = nodeEnv === "production";
 
 // Global Middleware
 app.use(cors());
-app.use(express.json());
 
 // Logging
 app.use(morgan(isProd ? "combined" : "dev"));
 
-// Security Headers
-app.use(helmet());
 
-// GZIP Compression
 if (isProd) {
+  // Security Headers
+  app.use(helmet());
+  // GZIP Compression
   app.use(compression());
+  // 📊 Prometheus Metrics Middleware
+  app.use(metricsMiddleware);
+  app.get("/metrics", metricsEndpoint);
 }
 
-// 📊 Prometheus Metrics Middleware
-app.use(metricsMiddleware);
-app.get("/metrics", metricsEndpoint);
 
 app.use((req, res, next) => {
   console.log(`🧭 Incoming request: ${req.method} ${req.originalUrl}`);
@@ -38,7 +37,7 @@ app.use((req, res, next) => {
 
 // Main API Router
 const mainRouter = require("./routes/index.route");
-const passport = require("passport");
+
 app.use("/api/v1", mainRouter);
 app.use((req, res) => {
   console.log(`❌ 404 - Route not found: ${req.method} ${req.originalUrl}`);

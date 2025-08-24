@@ -1,6 +1,4 @@
 const { z } = require("zod");
-const { init } = require("../../../models/user.model");
-const { otp } = require("../../../config/env.config");
 
 // User Signup Schema
 const userSignupSchema = z.object({

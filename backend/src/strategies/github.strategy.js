@@ -4,10 +4,6 @@ const User = require("../models/user.model");
 const githubEnv = require("../config/env.config").oauth.github;
 
 function setupGitHubStrategy(passport) {
-  console.log("githubEnv", githubEnv);
-  console.log("GitHub Client ID used:", githubEnv.clientID);
-  console.log("GitHub Client Secret used:", githubEnv.clientSecret);
-  console.log("GitHub Callback URL used:", githubEnv.callbackURL);
   
   if (!githubEnv.clientID || !githubEnv.clientSecret || !githubEnv.callbackURL) {
     console.error("GitHub OAuth environment variables are not set properly.");

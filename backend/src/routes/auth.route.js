@@ -1,20 +1,15 @@
 const express = require("express");
-
 const router = express.Router();
 
 // Import controllers
 const authController = require("../controllers/auth/auth.controller");
-
 // Import middleware
 const { validate } = require("../middlewares/zod/inputValidator.middleware");
 const { createAuthMiddleware } = require("../middlewares/auth/auth.middleware");
-
 // Import Zod schemas
 const authSchema = require("../middlewares/zod/schemas/authSchema");
-
 // Import JWT environment variables
 const jwt = require("../config/env.config").jwt;
-
 // import strategies
 const passport = require("../config/passport.config");
 

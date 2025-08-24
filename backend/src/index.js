@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("dotenv").config({ path: require('path').resolve(__dirname, '../.env') });
 
 const app = require("./app");
 const connectDB = require("./config/connectDB.config");
@@ -13,7 +13,7 @@ process.on("SIGTERM", redis.disconnect);
     await connectDB();
 
     app.listen(port, () => {
-      console.log(`🚀 Server running in ${nodeEnv} mode on port ${port}`);
+      console.log(`🚀 Server running in ${nodeEnv} on route ✅ http://localhost:${port}`);
     });
   } catch (error) {
     console.error("❌ Server failed to start:", error.message);
