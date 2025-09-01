@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+.bg-text {
+    clip-path: polygon(
+    0% 0%,    /* top-left */
+    80% 0%,   /* top-right before arrow point */
+    100% 50%, /* arrow tip */
+    80% 100%, /* bottom-right before arrow */
+    0% 100%,   /* bottom-left */
+    20% 50%
+  );
+}
+
+.bg-text2 {
+    clip-path: polygon(
+    0% 0%,    /* top-left */
+    100% 0%, /* arrow tip */
+    95% 50%,   /* top-right before arrow point */
+    100% 100%, /* bottom-right before arrow */
+    0% 100%,   /* bottom-left */
+    5% 50%
+  );
+}
