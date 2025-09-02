@@ -1,10 +1,5 @@
 import React, { type FC } from "react";
-
-interface ServiceCardProps {
-  icon: React.ElementType;
-  title: string;
-  description: string;
-}
+import type { ServiceCardProps } from "../types/ServiceCardTypes";
 
 const ServiceCard: FC<ServiceCardProps> = ({
   icon: Icon,
