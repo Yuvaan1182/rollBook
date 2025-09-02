@@ -15,9 +15,9 @@
     clip-path: polygon(
     0% 0%,    /* top-left */
     100% 0%, /* arrow tip */
-    95% 50%,   /* top-right before arrow point */
+    90% 50%,   /* top-right before arrow point */
     100% 100%, /* bottom-right before arrow */
     0% 100%,   /* bottom-left */
-    5% 50%
+    10% 50%
   );
 }

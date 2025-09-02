@@ -1,12 +1,12 @@
 import { MoveRight } from "lucide-react";
-import heroImg from "../../../assets/images/hero-bg.png";
+import projections from "../../../assets/svgs/fall.svg";
 
 const WelcomeSection = () => {
   return (
     <div className="flex items-center h-screen justify-center relative overflow-hidden px-40">
       <img
-        className="scale-[3] absolute right-[220px]"
-        src={heroImg}
+        className="scale-[1.65] absolute right-[0px]"
+        src={projections}
         alt="hero-bg"
       />
       <div className="z-10 flex">

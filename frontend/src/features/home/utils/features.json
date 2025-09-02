@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Automated Invoicing",
+    "description": "Generate and send professional invoices instantly, saving time and effort.",
+    "icon": "FileText"
+  },
+  {
+    "title": "Smart Expense Tracking",
+    "description": "Keep all your expenses organized in one place with real-time insights.",
+    "icon": "BarChart"
+  },
+  {
+    "title": "Secure Online Payments",
+    "description": "Accept payments globally with trusted gateways for faster collections.",
+    "icon": "CreditCard"
+  },
+  {
+    "title": "Tax-Ready Reports",
+    "description": "Download compliant reports and stay worry-free during tax season.",
+    "icon": "CheckCircle"
+  },
+  {
+    "title": "Project & Milestone Management",
+    "description": "Track work progress and link payments seamlessly to client deliverables.",
+    "icon": "Briefcase"
+  },
+  {
+    "title": "Subscription & Recurring Billing",
+    "description": "Set up recurring invoices and get paid on time without manual follow-ups.",
+    "icon": "Repeat"
+  }
+]
