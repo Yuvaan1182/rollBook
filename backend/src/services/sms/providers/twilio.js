@@ -1,10 +1,15 @@
-const twilio = require("twilio");
-const client = twilio(process.env.TWILIO_SID, process.env.TWILIO_AUTH_TOKEN);
+const { createHttpClient } = require("../../../lib/clients/httpClient");
+const { configs } = require("../../../config/constants/smsProviders");
+const { twilio } = require("../../../config/constants/serviceEndPoints");
 
-module.exports = async function sendWithTwilio({ to, body }) {
-  return await client.messages.create({
-    body,
-    from: process.env.TWILIO_PHONE,
-    to
+const sendViaTwilio = async (payload) => {
+  const http = createHttpClient(configs.twilio);
+  return await http.post(`${twilio.baseUrl}${twilio.sendSms}`, payload, {
+    auth: {
+      username: process.env.TWILIO_SID,
+      password: process.env.TWILIO_AUTH_TOKEN
+    }
   });
 };
+
+module.exports = sendViaTwilio;

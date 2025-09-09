@@ -1,9 +1,9 @@
 module.exports = {
-  gateways: ["stripe", "razorpay"],
+  gateways: ["stripe"],
 
   configs: {
     stripe: {
-      currency: "usd",
+      currency: "inr",
       timeout: 6000,
       retries: 2,
       backoff: 1000

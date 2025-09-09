@@ -4,32 +4,42 @@ const morgan = require("morgan");
 const helmet = require("helmet");
 const compression = require("compression");
 
-const { nodeEnv } = require("./config/env");
-// const { metricsMiddleware } = require("./lib/metrics");
+const { nodeEnv } = require("./config/env.config");
+
+// Importing the metrics middleware for Prometheus
+const { metricsMiddleware, metricsEndpoint } = require("./lib/logger/metric");
 
 const app = express();
 const isProd = nodeEnv === "production";
 
 // Global Middleware
 app.use(cors());
-app.use(express.json());
 
 // Logging
 app.use(morgan(isProd ? "combined" : "dev"));
 
-// Security Headers
-app.use(helmet());
-
-// GZIP Compression
 if (isProd) {
+  // Security Headers
+  app.use(helmet());
+  // GZIP Compression
   app.use(compression());
+  // 📊 Prometheus Metrics Middleware
+  app.use(metricsMiddleware);
+  app.get("/metrics", metricsEndpoint);
 }
 
-// 📊 Prometheus Metrics Middleware
-// app.use(metricsMiddleware);
+app.use((req, res, next) => {
+  console.log(`🧭 Incoming request: ${req.method} ${req.originalUrl}`);
+  next();
+});
 
 // Main API Router
-const mainRouter = require("./routes/index");
+const mainRouter = require("./routes/index.route");
+
 app.use("/api/v1", mainRouter);
+app.use((req, res) => {
+  console.log(`❌ 404 - Route not found: ${req.method} ${req.originalUrl}`);
+  res.status(404).json({ error: "Not Found" });
+});
 
 module.exports = app;

@@ -1,2 +1,2 @@
 
-require('./processors/emailProcessor'); // import more as needed
+require('./start-worker/startEmailWorker'); // import more as needed

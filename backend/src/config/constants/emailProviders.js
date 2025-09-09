@@ -1,5 +1,5 @@
 module.exports = {
-  providers: ["resend", "sendgrid"], // priority order
+  providers: ["resend"], // priority order, nodemailer for dev/test , "sendgrid", "nodemailer"
   configs: {
     resend: {
       timeout: 4000,
@@ -10,6 +10,11 @@ module.exports = {
       timeout: 5000,
       retries: 1,
       backoff: 1500
+    },
+    nodemailer: {
+      timeout: 3000,
+      retries: 0,
+      backoff: 0
     }
   }
 };
