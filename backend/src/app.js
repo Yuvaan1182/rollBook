@@ -5,7 +5,7 @@ const helmet = require("helmet");
 const compression = require("compression");
 
 const { nodeEnv } = require("./config/env");
-const { metricsMiddleware } = require("./lib/metrics");
+// const { metricsMiddleware } = require("./lib/metrics");
 
 const app = express();
 const isProd = nodeEnv === "production";
@@ -26,7 +26,7 @@ if (isProd) {
 }
 
 // 📊 Prometheus Metrics Middleware
-app.use(metricsMiddleware);
+// app.use(metricsMiddleware);
 
 // Main API Router
 const mainRouter = require("./routes/index");
