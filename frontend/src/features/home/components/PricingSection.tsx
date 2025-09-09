@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const plans = [
   {
@@ -34,7 +34,7 @@ const plans = [
 
 const PricingSection = () => {
   return (
-    <section className="bg-[#f4f4f4] py-14">
+    <section id="pricing" className="bg-[#f4f4f4] py-14">
       <div className="max-w-4xl mx-auto px-4">
         <div className="text-center mb-10">
           <h2 className="text-3xl font-bold text-[#4F200D]">Pricing</h2>

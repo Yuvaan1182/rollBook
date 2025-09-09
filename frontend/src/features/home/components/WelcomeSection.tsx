@@ -3,7 +3,10 @@ import projections from "../../../assets/svgs/fall.svg";
 
 const WelcomeSection = () => {
   return (
-    <div className="flex items-center h-screen justify-center relative overflow-hidden px-40">
+    <section
+      id="home"
+      className="flex items-center h-screen justify-center relative overflow-hidden px-40"
+    >
       <img
         className="scale-[1.65] absolute right-[0px]"
         src={projections}
@@ -22,7 +25,7 @@ const WelcomeSection = () => {
         </div>
         <div className="flex-1/2"></div>
       </div>
-    </div>
+    </section>
   );
 };
 
