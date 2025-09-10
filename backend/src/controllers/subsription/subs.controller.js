@@ -22,9 +22,12 @@ const subsController = {
   getSubPlans: async (req, res) => {
     try {
       const plans = await SubscriptionPlan.find({ active: true });
-      return successResponse(res, "Subscription plans fetched successfully", {
+      return successResponse(
+        res,
+        "Subscription plans fetched successfully",
         plans,
-      });
+        200
+      );
     } catch (error) {
       console.error("Error fetching subscription plans:", error);
       return errorResponse(

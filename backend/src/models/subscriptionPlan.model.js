@@ -74,6 +74,15 @@ const subscriptionPlanSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+    popular: {
+      type: Boolean,
+      default: false,
+    },
+    limits: {
+      maxTokensPerMonth: { type: Number, default: 50000 },
+      maxProposalsPerMonth: { type: Number, default: 10 },
+      maxInvoicesPerMonth: { type: Number, default: 50 },
+    },
   },
   { timestamps: true }
 );

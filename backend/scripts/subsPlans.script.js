@@ -15,6 +15,12 @@ const plans = [
     isCustom: false,
     maxTeamMembers: 1,
     supportLevel: "email",
+    features: [
+      "Basic Email Support",
+      "1 Team Member",
+      "Limited Proposals & Invoices",
+      "Access to Core Features",
+    ],
     limits: {
       maxTokensPerMonth: 1000,
       maxProposalsPerMonth: 2,
@@ -35,11 +41,19 @@ const plans = [
     isCustom: false,
     maxTeamMembers: 5,
     supportLevel: "chat",
+    features: [
+      "Priority Chat Support",
+      "Up to 5 Team Members",
+      "Increased Proposals & Invoices",
+      "Advanced Analytics",
+      "Customizable Templates",
+    ],
     limits: {
       maxTokensPerMonth: 10000,
       maxProposalsPerMonth: 20,
       maxInvoicesPerMonth: 100,
     },
+    popular: true,
     stripeMonthlyPriceId: "price_1Rqt7jElZvIO9FFbGFzcHgjd",
     stripeProductId: "prod_SmS1JtLoVJUyPX",
     priceMonthly: 1499,
@@ -55,6 +69,13 @@ const plans = [
     isCustom: false,
     maxTeamMembers: 20,
     supportLevel: "priority",
+    features: [
+      "24/7 Priority Support",
+      "Up to 20 Team Members",
+      "High Usage Limits",
+      "Dedicated Account Manager",
+      "Enterprise Integrations",
+    ],
     limits: {
       maxTokensPerMonth: 50000,
       maxProposalsPerMonth: 100,
