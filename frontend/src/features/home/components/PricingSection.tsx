@@ -1,8 +1,18 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 
+type Plan = {
+  name: string;
+  description: string;
+  price: number | string;
+  period: string;
+  features: string[];
+  popular?: boolean;
+  buttonText: string;
+};
+
 const PricingSection = () => {
-  const [plans, setPlans] = React.useState<any[]>([]);
+  const [plans, setPlans] = React.useState<Plan[]>([]);
 
   const getPlans = async () => {
     try {
