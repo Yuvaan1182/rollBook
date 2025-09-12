@@ -2,8 +2,8 @@ import Footer from "./Footer";
 import HowItWorks from "./HowItWorks";
 import Navbar from "./Navbar";
 import PricingSection from "./PricingSection";
-import ServiceSection from "./ServiceSection";
 import WelcomeSection from "./WelcomeSection";
+import FeaturesSection from "./FeaturesSection";
 
 const HeroWrapper = () => {
   return (
@@ -11,7 +11,7 @@ const HeroWrapper = () => {
       {/* <Navbar /> */}
       <Navbar />
       <WelcomeSection />
-      <ServiceSection />
+      <FeaturesSection />
       {/* <HowItWorks /> */}
       <PricingSection />
       <Footer />

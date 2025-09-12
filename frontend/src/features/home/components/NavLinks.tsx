@@ -4,7 +4,7 @@ import { Link } from "react-scroll";
 const NavLinks = () => {
   return (
     <ul className="flex space-x-8 text-[#4F200D] font-medium">
-      <li className="hover:scale-110 transition">
+      <li className="hover:scale-110 transition cursor-pointer">
         <Link
           to="home"
           smooth={true}
@@ -14,7 +14,7 @@ const NavLinks = () => {
           Home
         </Link>
       </li>
-      <li className="hover:scale-110 transition">
+      <li className="hover:scale-110 transition cursor-pointer">
         <Link
           to="features"
           smooth={true}
@@ -24,7 +24,7 @@ const NavLinks = () => {
           Features
         </Link>
       </li>
-      <li className="hover:scale-110 transition">
+      <li className="hover:scale-110 transition cursor-pointer">
         <Link
           to="pricing"
           smooth={true}
@@ -34,7 +34,7 @@ const NavLinks = () => {
           Pricing
         </Link>
       </li>
-      <li className="hover:scale-110 transition">
+      <li className="hover:scale-110 transition cursor-pointer">
         <Link
           to="contact"
           smooth={true}

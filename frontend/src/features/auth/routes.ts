@@ -3,6 +3,7 @@ import type { AppRoute } from "../../app/types/RouteTypes";
 import AuthLayout from "../../components/layouts/AuthLayout";
 
 const Login = lazy(() => import("./pages/LoginPage"));
+const Signup = lazy(() => import("./pages/SignupPage"));
 
 export const authRoutes: AppRoute[] = [
   {
@@ -12,4 +13,11 @@ export const authRoutes: AppRoute[] = [
     isPrivate: false,
     roles: ["public"]
   },
+  {
+    path: "/register",
+    element: Signup,
+    layout: AuthLayout,
+    isPrivate: false,
+    roles: ["public"]
+  }
 ];

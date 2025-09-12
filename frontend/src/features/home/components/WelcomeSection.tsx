@@ -14,7 +14,7 @@ const WelcomeSection = () => {
       />
       <div className="z-10 flex">
         <div className="flex-1/2 flex flex-col gap-8">
-          <h1 className="font-bold text-7xl">{`“Simplify Invoicing, Payments & Subscriptions – All in One Hub.”`}</h1>
+          <h1 className="font-bold text-6xl">{`“Simplify Invoicing, Payments & Subscriptions – All in One Hub.”`}</h1>
           <p className="font-light tracking-wider text-xl">
             Send professional invoices, track payments, manage subscriptions,
             and grow your freelance business effortlessly.

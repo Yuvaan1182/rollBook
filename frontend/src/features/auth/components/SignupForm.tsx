@@ -2,15 +2,21 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-type LoginFormTypes = {
+type SignupFormTypes = {
+  name: string;
   email: string;
   password: string;
+  confirmPassword: string;
+  phone: string;
 };
 
-const LoginForm = () => {
-  const [formData, setFormData] = useState<LoginFormTypes>({
+const SignupForm = () => {
+  const [formData, setFormData] = useState<SignupFormTypes>({
+    name: "",
     email: "",
     password: "",
+    confirmPassword: "",
+    phone: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,6 +67,23 @@ const LoginForm = () => {
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
             <label
+              htmlFor="name"
+              className="block text-sm font-medium text-[#4F200D] mb-1"
+            >
+              Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              value={formData.name}
+              onChange={handleChange}
+              size={30}
+              placeholder="User Name"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF9A00] focus:outline-none"
+            />
+          </div>
+          <div>
+            <label
               htmlFor="email"
               className="block text-sm font-medium text-[#4F200D] mb-1"
             >
@@ -93,29 +116,54 @@ const LoginForm = () => {
             />
           </div>
 
-          <div className="flex justify-between items-center text-sm">
-            <label className="flex items-center text-[#4F200D]">
-              <input type="checkbox" className="mr-2" /> Remember me
+          <div>
+            <label
+              htmlFor="confirmPassword"
+              className="block text-sm font-medium text-[#4F200D] mb-1"
+            >
+              Confirm Password
             </label>
-            <a href="#" className="text-[#FF9A00] hover:underline">
-              Forgot Password?
-            </a>
+            <input
+              type="password"
+              id="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              placeholder="••••••••"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FFD93D] focus:outline-none"
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="phone"
+              className="block text-sm font-medium text-[#4F200D] mb-1"
+            >
+              Phone
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              placeholder="123-456-7890"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FFD93D] focus:outline-none"
+            />
           </div>
 
           <button
             type="submit"
             className="w-full bg-[#FF9A00] hover:bg-[#e68900] text-white font-semibold py-3 rounded-lg transition"
           >
-            Log In
+            Sign Up
           </button>
         </form>
 
         {/* Footer Links */}
         <div className="text-center mt-6">
           <p className="text-sm text-[#4F200D]">
-            Don’t have an account?{" "}
+            Already have an account?{" "}
             <span className="text-[#FF9A00] font-semibold hover:underline">
-              <Link to="/register">Sign up here</Link>
+              <Link to="/register">Login</Link>
             </span>
           </p>
         </div>
@@ -124,4 +172,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default SignupForm;
