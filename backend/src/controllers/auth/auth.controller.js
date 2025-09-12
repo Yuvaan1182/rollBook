@@ -219,7 +219,7 @@ const authController = {
         html: emailOtpTemplate(otp, "login"),
         text: `Your login OTP is ${otp}`,
       });
-      
+
       return successResponse(
         res,
         "OTP sent to your email. Please verify to complete login",
@@ -237,7 +237,6 @@ const authController = {
     try {
       const { email, otp } = req.body;
       console.log("Verifying OTP for user:", req.body);
-      
 
       const user = await User.findOne({ email });
       if (!user)
@@ -247,9 +246,10 @@ const authController = {
           { message: "USER_NOT_FOUND" },
           404
         );
-      
-        // marked isValid true for debugging
-      const isValid = true || await otpStore.validate(`LOGIN_EMAIL_OTP:${email}`, otp);
+
+      // marked isValid true for debugging
+      const isValid =
+        true || (await otpStore.validate(`LOGIN_EMAIL_OTP:${email}`, otp));
       if (!isValid)
         return errorResponse(
           res,
@@ -257,9 +257,9 @@ const authController = {
           { message: "INVALID_OTP" },
           400
         );
-      
-        // added isValid check for debugging
-      !isValid && await otpStore.invalidate(`LOGIN_EMAIL_OTP:${email}`);
+
+      // added isValid check for debugging
+      !isValid && (await otpStore.invalidate(`LOGIN_EMAIL_OTP:${email}`));
 
       // Generate JWT
       const token = jwt.sign({ id: user._id }, jwtEnv.secret, {
@@ -358,11 +358,11 @@ const authController = {
         expiresIn: jwtEnv.expiresIn,
       });
 
-      if(nodeEnv === "development") {
+      if (nodeEnv === "development") {
         res.json({ token, user: req.user });
         return;
       }
-      
+
       res.redirect(`${reactEnv.url}?token=${token}`);
     } catch (err) {
       errorResponse(res, "Google OAuth failed", err, 500);
@@ -377,7 +377,7 @@ const authController = {
         expiresIn: jwtEnv.expiresIn,
       });
 
-      if(nodeEnv === "development") {
+      if (nodeEnv === "development") {
         res.json({ token, user: req.user });
         return;
       }

@@ -58,7 +58,11 @@ router.post(
 );
 
 // disable 2fa
-router.post("/login/disable-2fa", createAuthMiddleware({secret: jwt.secret}), authController.disable2FA);
+router.post(
+  "/login/disable-2fa",
+  createAuthMiddleware({ secret: jwt.secret }),
+  authController.disable2FA
+);
 
 // OAuth routes
 router.get(
