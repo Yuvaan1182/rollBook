@@ -5,7 +5,10 @@ const userSignupSchema = z.object({
   name: z.string().min(2).max(100),
   email: z.email(),
   password: z.string().min(8).max(128),
-  phone: z.string().regex(/^\+?[0-9]{7,15}$/),
+  phone: z
+    .string()
+    .regex(/^\+\d{1,4}-\d{6,14}$/, "Invalid phone number format")
+    .optional(),
 });
 
 // User Login Schema
@@ -37,11 +40,14 @@ const verifyEmailOtpSchema = z.object({
   otp: z.string().min(4).max(8),
 });
 
-// enable 2fa 
+// enable 2fa
 const initialize2FASchema = z
   .object({
     email: z.email().optional(),
-    phone: z.string().regex(/^[0-9]{10,15}$/).optional(),
+    phone: z
+      .string()
+      .regex(/^[0-9]{10,15}$/)
+      .optional(),
   })
   .refine((data) => data.email || data.phone, {
     message: "Either email or phone is required",

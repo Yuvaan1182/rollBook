@@ -41,6 +41,7 @@ const authController = {
   registerUsingMail: async (req, res) => {
     try {
       const { email, password, ...rest } = req.body;
+      console.log(req.body);
 
       const existingUser = await User.findOne({ email });
       if (existingUser) {
@@ -357,11 +358,6 @@ const authController = {
       const token = jwt.sign({ id: id }, jwtEnv.secret, {
         expiresIn: jwtEnv.expiresIn,
       });
-
-      if (nodeEnv === "development") {
-        res.json({ token, user: req.user });
-        return;
-      }
 
       res.redirect(`${reactEnv.url}?token=${token}`);
     } catch (err) {

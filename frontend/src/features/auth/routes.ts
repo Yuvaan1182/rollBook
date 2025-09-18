@@ -4,6 +4,7 @@ import AuthLayout from "../../components/layouts/AuthLayout";
 
 const Login = lazy(() => import("./pages/LoginPage"));
 const Signup = lazy(() => import("./pages/SignupPage"));
+const OTP = lazy(() => import("./pages/OtpVerifyPage"));
 
 export const authRoutes: AppRoute[] = [
   {
@@ -11,13 +12,20 @@ export const authRoutes: AppRoute[] = [
     element: Login,
     layout: AuthLayout,
     isPrivate: false,
-    roles: ["public"]
+    roles: ["public"],
   },
   {
     path: "/register",
     element: Signup,
     layout: AuthLayout,
     isPrivate: false,
-    roles: ["public"]
-  }
+    roles: ["public"],
+  },
+  {
+    path: "/verify-otp",
+    element: OTP,
+    layout: AuthLayout,
+    isPrivate: false,
+    roles: ["user", "admin"],
+  },
 ];

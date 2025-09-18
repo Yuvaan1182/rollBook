@@ -1,5 +1,5 @@
 // src/features/auth/slice.ts
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 export interface User {
   id: string;
@@ -22,7 +22,7 @@ const initialState: AuthState = {
 };
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   reducers: {
     loginStart(state) {

@@ -3,10 +3,14 @@ const User = require("../models/user.model");
 const googleEnv = require("../config/env.config").oauth.google;
 
 const setupGoogleStrategy = (passport) => {
-  if (!googleEnv.clientID || !googleEnv.clientSecret || !googleEnv.callbackURL) {
+  if (
+    !googleEnv.clientID ||
+    !googleEnv.clientSecret ||
+    !googleEnv.callbackURL
+  ) {
     console.error("Google OAuth environment variables are not set properly.");
     return;
-  } 
+  }
   passport.use(
     new GoogleStrategy(
       {
@@ -25,6 +29,7 @@ const setupGoogleStrategy = (passport) => {
               name: profile.displayName,
               provider: "google",
               googleId: profile.id,
+              isEmailVerified: true,
             });
           }
 
@@ -35,6 +40,6 @@ const setupGoogleStrategy = (passport) => {
       }
     )
   );
-}
+};
 
 module.exports = setupGoogleStrategy;
