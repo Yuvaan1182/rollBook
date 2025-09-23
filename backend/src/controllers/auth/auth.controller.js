@@ -91,7 +91,7 @@ const authController = {
       // store OTP in redis
       const hashedOtp = await bcrypt.hash(otp, bcryptEnv.saltRounds);
       await otpStore.store({
-        key: `REGISTER_EMAIL_OTP:${email}`,
+        key: `EMAIL_VERIFY_OTP:${email}`,
         val: hashedOtp,
       });
 
@@ -111,10 +111,13 @@ const authController = {
       const { email, otp } = req.body;
 
       const pendingKey = `PENDING_USER:${email}`;
-      const otpKey = `EMAIL_OTP:${email}`;
+      const otpKey = `EMAIL_VERIFY_OTP:${email}`;
 
       const user = await redis.getJSON(pendingKey);
+
       if (!user) {
+        console.log("User not found");
+
         return errorResponse(
           res,
           "Invalid or expired verification link",
@@ -125,6 +128,8 @@ const authController = {
 
       const isValidOtp = await otpStore.validate(otpKey, otp);
       if (!isValidOtp) {
+        console.log("Invalid Otp");
+
         return errorResponse(
           res,
           "Invalid OTP. Please check and try again.",
@@ -173,6 +178,67 @@ const authController = {
       return errorResponse(
         res,
         "An unexpected error occurred during verification.",
+        err,
+        500
+      );
+    }
+  },
+
+  // resend verification otp
+  resendVerificationOtp: async (req, res) => {
+    try {
+      const { email } = req.body;
+      const pendingKey = `PENDING_USER:${email}`;
+      const otpKey = `EMAIL_VERIFY_OTP:${email}`;
+
+      const user = await redis.getJSON(pendingKey);
+      if (!user) {
+        return errorResponse(
+          res,
+          "No pending registration found for this email",
+          { message: "PENDING_USER_NOT_FOUND" },
+          404
+        );
+      }
+
+      // Generate new OTP
+      const otp = generateOtp();
+
+      // Send otp via email payload to email queue
+      const html = emailOtpTemplate(otp);
+      const payload = {
+        to: email,
+        subject: "Invoxy Email Verification Mail - Resend",
+        otp: otp, // still useful for future reference
+        type: "otp-verification", // still useful for future reference
+        from: from,
+        html: html,
+        text: `Invoxy, Verify Your Email, Use the following OTP to verify your email address:${otp}
+          This OTP is valid for 5 minutes. Do not share this code with anyone.
+          If you didn’t request this, please ignore this message.
+        © 2025 Invoxy. All rights reserved.`,
+      };
+
+      await emailQueue.add("sendVerificationOtp", payload);
+
+      // store OTP in redis
+      const hashedOtp = await bcrypt.hash(otp, bcryptEnv.saltRounds);
+      await otpStore.store({
+        key: otpKey,
+        val: hashedOtp,
+      });
+
+      return successResponse(
+        res,
+        "Verification OTP resent. Please check your email.",
+        null,
+        200
+      );
+    } catch (err) {
+      console.error("Resend OTP Error:", err);
+      return errorResponse(
+        res,
+        "Failed to resend verification OTP. Please try again.",
         err,
         500
       );

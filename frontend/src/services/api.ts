@@ -1,6 +1,6 @@
 // src/services/api.ts
 import axios, { AxiosError } from "axios";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 
 export interface ApiError {
   status?: number;

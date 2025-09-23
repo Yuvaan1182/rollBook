@@ -1,5 +1,4 @@
-import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Props = {
   length?: number; // number of OTP inputs (default 6)
@@ -35,7 +34,7 @@ export default function OTPVerification({
   placeholderChar = "",
 }: Props) {
   const [values, setValues] = useState<string[]>(() => Array(length).fill(""));
-  const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
+  const inputsRef = useRef<Array<HTMLInputElement | null>>([]);
   const [secondsLeft, setSecondsLeft] = useState<number>(resendTimeout);
   const [isCounting, setIsCounting] = useState<boolean>(enableResend);
 
@@ -62,7 +61,7 @@ export default function OTPVerification({
     // If all filled, call onComplete
     const otp = values.join("");
     onChange?.(otp);
-    if (otp.length === length && !otp.includes("")) {
+    if (otp.length === length && values.every((v) => v !== "")) {
       onComplete?.(otp);
     }
   }, [values, length, onChange, onComplete]);
@@ -188,21 +187,8 @@ export default function OTPVerification({
     }, 1000);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const otp = values.join("");
-    if (otp.length === length && !otp.includes("")) {
-      onComplete?.(otp);
-    }
-    const response = axios.post(
-      "http://localhost:3001/api/v1/auth/verify-otp",
-      { otp }
-    );
-  };
   return (
-    <div
-      className={`h-screen flex flex-col justify-center gap-5 items-center ${className}`}
-    >
+    <div className={`flex flex-col items-center ${className}`}>
       <div className="flex gap-3">
         {Array.from({ length }).map((_, idx) => (
           <input
@@ -230,9 +216,6 @@ export default function OTPVerification({
           />
         ))}
       </div>
-      <button type="submit" className="px-6 py-2 text-white bg-amber-500">
-        Verify Otp
-      </button>
 
       {enableResend && (
         <div className="mt-3 text-sm text-center">

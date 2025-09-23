@@ -15,17 +15,19 @@ import type { AppRoute } from "../types/RouteTypes";
 const allRoutes: AppRoute[] = [
   ...authRoutes,
   ...homeRoute,
-//   ...invoicesRoutes,
-//   ...analyticsRoutes,
-//   ...subscriptionsRoutes,
+  //   ...invoicesRoutes,
+  //   ...analyticsRoutes,
+  //   ...subscriptionsRoutes,
 ];
 
 const AppRouter = () => (
-  <BrowserRouter>
-    <Suspense fallback={<div>Loading...</div>}>
-      <Routes>{renderRoutes(allRoutes)}</Routes>
-    </Suspense>
-  </BrowserRouter>
+  <>
+    <BrowserRouter>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>{renderRoutes(allRoutes)}</Routes>
+      </Suspense>
+    </BrowserRouter>
+  </>
 );
 
 export default AppRouter;

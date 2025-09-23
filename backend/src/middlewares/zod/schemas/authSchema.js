@@ -7,8 +7,9 @@ const userSignupSchema = z.object({
   password: z.string().min(8).max(128),
   phone: z
     .string()
-    .regex(/^\+\d{1,4}-\d{6,14}$/, "Invalid phone number format")
+    .regex(/^\d{6,14}$/, "Invalid phone number format")
     .optional(),
+  countryCode: z.string().min(1).max(10).optional(),
 });
 
 // User Login Schema
@@ -36,14 +37,14 @@ const loginEmailOtpSchema = z.object({
 
 // Verify Email OTP
 const verifyEmailOtpSchema = z.object({
-  email: z.email(),
+  email: z.email({ message: "Invalid email format" }),
   otp: z.string().min(4).max(8),
 });
 
 // enable 2fa
 const initialize2FASchema = z
   .object({
-    email: z.email().optional(),
+    email: z.email({ message: "Invalid email format" }).optional(),
     phone: z
       .string()
       .regex(/^[0-9]{10,15}$/)
@@ -60,12 +61,17 @@ const verify2FASchema = z.object({
   token: z.string().length(6, "Token must be a 6-digit code"),
 });
 
+const resendOtpSchema = z.object({
+  email: z.email({ message: "Invalid email format" }),
+});
+
 // Combine all schemas into a single object for easy export
 const authSchema = {
   userSignup: userSignupSchema,
   userLogin: userLoginSchema,
   loginMobileOtp: loginMobileOtpSchema,
   verifyMobileOtp: verifyMobileOtpSchema,
+  resendOtp: resendOtpSchema,
   loginEmailOtp: loginEmailOtpSchema,
   verifyEmailOtp: verifyEmailOtpSchema,
   init: initialize2FASchema,

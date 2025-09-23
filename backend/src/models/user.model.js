@@ -27,6 +27,7 @@ const UserSchema = new mongoose.Schema({
   },
   password: { type: String, minlength: 8, maxlength: 128 }, // hashed
   phone: { type: String, match: /^\+?[0-9]{7,15}$/ },
+  countryCode: { type: String, trim: true, maxlength: 10 },
   isEmailVerified: { type: Boolean, default: false },
   isPhoneVerified: { type: Boolean, default: false },
   is2FAEnabled: { type: Boolean, default: false },

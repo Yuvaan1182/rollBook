@@ -1,26 +1,17 @@
-// src/app/store/index.ts
-import { configureStore } from '@reduxjs/toolkit';
-import authReducer from '../../features/auth/slice';
-// import invoiceReducer from '@/features/invoices/slice';
-// import paymentReducer from '@/features/payments/slice';
-// import subscriptionReducer from '@/features/subscriptions/slice';
-// import analyticsReducer from '@/features/analytics/slice';
+import { configureStore } from "@reduxjs/toolkit";
+import { persistStore } from "redux-persist";
+import rootReducer from "./rootReducer";
 
 export const store = configureStore({
-  reducer: {
-    auth: authReducer,
-    // invoices: invoiceReducer,
-    // payments: paymentReducer,
-    // subscriptions: subscriptionReducer,
-    // analytics: analyticsReducer,
-  },
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false, // disable if you store non-serializable objects
     }),
-  devTools: import.meta.env.MODE !== 'production',
+  devTools: import.meta.env.MODE !== "production",
 });
 
 // Infer RootState & AppDispatch from the store itself
+export const persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

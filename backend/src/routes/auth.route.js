@@ -27,6 +27,13 @@ router.post(
   authController.verifyEmailOnSignup
 );
 
+// Resend verification email
+router.post(
+  "/register/resend-verification-email",
+  validate(authSchema.resendOtp, "body"),
+  authController.resendVerificationOtp
+);
+
 // Login user
 router.post(
   "/login/email-password",
