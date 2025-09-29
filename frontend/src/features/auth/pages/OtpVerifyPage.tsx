@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../app/store/hooks";
 import AuthLayout from "../../../components/layouts/AuthLayout";
 import OTPVerification from "../components/OTPVerifcation";
-import { resendOtp, verifyOtp } from "../store/thunk";
+import { resendOtp, verifyEmail, verifyOTP } from "../store/thunk";
 import { useEffect } from "react";
 
 const OtpVerifyPage = () => {
@@ -11,19 +11,23 @@ const OtpVerifyPage = () => {
   const dispatch = useAppDispatch();
 
   // email passed from previous page
-  const { email } = (location.state || {}) as { email: string };
-  console.log("Locaiton:", location.state);
+  const { email, from } = (location.state || {}) as {
+    email: string;
+    from: string;
+  };
 
   // ✅ When all digits are entered OR user clicks Verify button
   const handleComplete = (otp: string) => {
-    console.log("Dispatching verifyOtp with:", otp);
-    dispatch(verifyOtp({ email, otp }));
+    const payload = { email, otp };
+    if (from === "signup") {
+      dispatch(verifyEmail(payload));
+    } else if (from === "login") {
+      dispatch(verifyOTP(payload));
+    }
   };
 
   // ✅ When user clicks Resend
   const handleResend = () => {
-    console.log("Email:", email);
-
     dispatch(resendOtp({ email }));
   };
 
@@ -31,7 +35,7 @@ const OtpVerifyPage = () => {
 
   useEffect(() => {
     if (success) {
-      navigate("/login");
+      navigate("/dashboard");
     }
   }, [success, navigate]);
 

@@ -154,7 +154,11 @@ const authController = {
         );
       }
 
-      const newUser = new User({ ...user, isEmailVerified: true });
+      const newUser = new User({
+        ...user,
+        isEmailVerified: true,
+        is2FAEnabled: true,
+      });
       const savedUser = await newUser.save();
 
       await redis.del(pendingKey);
@@ -259,7 +263,7 @@ const authController = {
           401
         );
 
-      const isMatch = await bcrypt.compare(password, user.password);
+      const isMatch = bcrypt.compare(password, user.password);
       if (!isMatch)
         return errorResponse(
           res,

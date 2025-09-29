@@ -68,7 +68,7 @@ const SignupForm = () => {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const payload = {
       name: formData.name,
@@ -77,7 +77,7 @@ const SignupForm = () => {
       phone: formData.phone,
       countryCode: formData.countryCode,
     };
-    await dispatch(register(payload));
+    dispatch(register(payload));
   };
 
   const { loading, success } = useAppSelector((state) => state.auth.signup);

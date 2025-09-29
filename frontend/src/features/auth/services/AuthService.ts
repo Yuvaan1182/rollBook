@@ -1,5 +1,5 @@
 import { api } from "../../../services/api";
-import { extractErrorMessage } from "../../../utils/errorHandler";
+import { extractErrorMessage } from "../../../utils/error.utils";
 
 class AuthService {
   async login(data: { email: string; password: string }) {
@@ -37,6 +37,16 @@ class AuthService {
     }
   }
 
+  async twoFAEmailVerification(data: { email: string; otp: string }) {
+    try {
+      const response = await api.post("/auth/login/verify-otp", data);
+      return response.data;
+    } catch (error) {
+      console.warn(error);
+      throw extractErrorMessage(error);
+    }
+  }
+
   async resendVerificationOtp(data: { email: string }) {
     try {
       const response = await api.post(
@@ -51,7 +61,7 @@ class AuthService {
 
   async googleLogin() {
     try {
-      const response = await api.post("/auth/google-login");
+      const response = await api.post("/auth/google");
       return response.data;
     } catch (error) {
       throw extractErrorMessage(error);

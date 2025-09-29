@@ -1,6 +1,6 @@
 // src/store/authThunks.ts
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { authService } from "../services/AuthService";
+import { authService } from "../services/authService";
 
 export const login = createAsyncThunk(
   "auth/login",
@@ -21,19 +21,33 @@ export const register = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
+      console.log("payload signup", data);
+
       const res = await authService.register(data);
-      return { name: data.name, email: data.email, phone: data.phone, ...res };
+      return res;
     } catch (err) {
       return rejectWithValue(err);
     }
   }
 );
 
-export const verifyOtp = createAsyncThunk(
-  "auth/verifyOtp",
+export const verifyEmail = createAsyncThunk(
+  "auth/verifyEmail",
   async (data: { email: string; otp: string }, { rejectWithValue }) => {
     try {
       const res = await authService.emailVerify(data);
+      return res;
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);
+
+export const verifyOTP = createAsyncThunk(
+  "auth/verifyEmail",
+  async (data: { email: string; otp: string }, { rejectWithValue }) => {
+    try {
+      const res = await authService.twoFAEmailVerification(data);
       return res;
     } catch (err) {
       return rejectWithValue(err);

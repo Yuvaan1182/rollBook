@@ -15,6 +15,8 @@ export const renderRoutes = (routes: AppRoute[]) =>
           isPrivate ? (
             <PrivateRoute roles={roles}>{wrappedContent}</PrivateRoute>
           ) : (
+            // commented for testing
+            // <Navigate to="/dashboard" replace />
             wrappedContent
           )
         }

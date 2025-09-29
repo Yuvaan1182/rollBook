@@ -1,4 +1,3 @@
-import axios from "axios";
 import React from "react";
 
 type Props = {
@@ -8,7 +7,6 @@ type Props = {
 const Google: React.FC<Props> = ({ text }) => {
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    // Add validation and API call logic as needed
     const url = "http://localhost:3001/api/v1/auth/google";
     window.location.href = url;
   };

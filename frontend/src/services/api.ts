@@ -22,8 +22,6 @@ export function handleApiError(error: unknown): ApiError {
           break;
         case 401:
           message = "Unauthorized. Please log in.";
-          // Optional: redirect
-          window.location.href = "/login";
           break;
         case 403:
           message = "Forbidden. You don’t have access.";

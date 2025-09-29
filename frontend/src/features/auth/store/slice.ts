@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { login, register, verifyOtp, googleLogin, resendOtp } from "./thunk";
+import { login, register, verifyEmail, googleLogin, resendOtp } from "./thunk";
 
 export interface User {
   id: string;
@@ -142,7 +142,8 @@ const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.login.loading = false;
         state.user = action.payload.user;
-        state.login.success = true;
+        state.login.message = action.payload?.message;
+        state.login.success = action.payload?.success;
       })
       .addCase(login.rejected, (state, action) => {
         state.login.loading = false;
@@ -165,15 +166,15 @@ const authSlice = createSlice({
         state.signup.error =
           (action.payload as { message: string })?.message || "Error";
       })
-      .addCase(verifyOtp.pending, (state) => {
+      .addCase(verifyEmail.pending, (state) => {
         state.otp.loading = true;
         state.otp.error = null;
       })
-      .addCase(verifyOtp.fulfilled, (state, action) => {
+      .addCase(verifyEmail.fulfilled, (state, action) => {
         state.otp.loading = false;
         state.otp.message = action.payload?.data?.message;
         state.otp.success = action.payload?.success;
-        console.log("verifyOtp:action.payload", action.payload);
+        console.log("verifyEmail:action.payload", action.payload);
         const obj = action.payload?.data?.user;
         const user: User = {
           name: obj.name,
@@ -194,7 +195,7 @@ const authSlice = createSlice({
         };
         state.user = user;
       })
-      .addCase(verifyOtp.rejected, (state, action) => {
+      .addCase(verifyEmail.rejected, (state, action) => {
         state.otp.loading = false;
         state.otp.error =
           (action.payload as { message: string })?.message || "Error";

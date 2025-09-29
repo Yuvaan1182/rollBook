@@ -12,14 +12,14 @@ export const authRoutes: AppRoute[] = [
     element: Login,
     layout: AuthLayout,
     isPrivate: false,
-    roles: ["public"],
+    roles: ["user"],
   },
   {
     path: "/register",
     element: Signup,
     layout: AuthLayout,
     isPrivate: false,
-    roles: ["public"],
+    roles: ["user"],
   },
   {
     path: "/verify-otp",

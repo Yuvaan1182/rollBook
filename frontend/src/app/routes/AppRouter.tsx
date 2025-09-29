@@ -10,6 +10,7 @@ import { homeRoute } from "../../features/home/routes";
 
 import { renderRoutes } from "./RouteRenderer";
 import type { AppRoute } from "../types/RouteTypes";
+import RouteTracker from "./RouteTracker";
 
 // Combine all feature routes
 const allRoutes: AppRoute[] = [
@@ -24,6 +25,7 @@ const AppRouter = () => (
   <>
     <BrowserRouter>
       <Suspense fallback={<div>Loading...</div>}>
+        <RouteTracker />
         <Routes>{renderRoutes(allRoutes)}</Routes>
       </Suspense>
     </BrowserRouter>

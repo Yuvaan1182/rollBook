@@ -22,10 +22,10 @@ const AuthLayout = ({ children }: AuthLayoutProps) => {
       {/* Auth Form (child component like LoginForm, SignupForm, etc.) */}
       {children}
       <div
-        className="absolute px-6 py-3 text-white cursor-pointer top-2 right-2 bg-black/80"
+        className="absolute px-6 py-3 text-white rounded-md cursor-pointer top-2 right-2 bg-black/60"
         onClick={handleLogout}
       >
-        Logout
+        Reset Auth State
       </div>
     </div>
   );
