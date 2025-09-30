@@ -1,10 +1,10 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 interface NavState {
-  lastRoute: string | null;
+  lastRoute: string;
 }
 
-const initialState: NavState = { lastRoute: null };
+const initialState: NavState = { lastRoute: "" };
 
 const navigationSlice = createSlice({
   name: "navigation",

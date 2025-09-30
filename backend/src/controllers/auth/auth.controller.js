@@ -429,7 +429,7 @@ const authController = {
         expiresIn: jwtEnv.expiresIn,
       });
 
-      res.redirect(`${reactEnv.url}?token=${token}`);
+      res.redirect(`${reactEnv.url}/dashboard?token=${token}`);
     } catch (err) {
       errorResponse(res, "Google OAuth failed", err, 500);
     }

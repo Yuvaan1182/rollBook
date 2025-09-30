@@ -12,6 +12,7 @@ export const authRoutes: AppRoute[] = [
     element: Login,
     layout: AuthLayout,
     isPrivate: false,
+    isRestrictedPublic: true,
     roles: ["user"],
   },
   {
@@ -19,6 +20,7 @@ export const authRoutes: AppRoute[] = [
     element: Signup,
     layout: AuthLayout,
     isPrivate: false,
+    isRestrictedPublic: true,
     roles: ["user"],
   },
   {
@@ -26,6 +28,7 @@ export const authRoutes: AppRoute[] = [
     element: OTP,
     layout: AuthLayout,
     isPrivate: false,
+    isRestrictedPublic: true,
     roles: ["user", "admin"],
   },
 ];
