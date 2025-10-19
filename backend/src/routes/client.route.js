@@ -4,10 +4,19 @@ const { createAuthMiddleware } = require("../middlewares/auth/auth.middleware");
 const { validate } = require("../middlewares/zod/inputValidator.middleware");
 const env = require("../config/env.config");
 
+const Client = require("../models/client/client.model");
+const ClientService = require("../services/client/client.service");
+const ClientController = require("../controllers/client/client.controller");
+
+const clientService = new ClientService(Client);
+const clientController = new ClientController(clientService);
+
 /** @Auth Middleware */
 router.use(createAuthMiddleware({ secret: env.jwt.secret }));
 
 /** @Routes */
+// router.post("/client", clientController.createClient);
+// router.get("/clients", clientController.getClients);
 // router.post("/client", validate(), addClient);
 // router.get("/clients", validate(), getClients);
 // router.get("/client/:id", validate(), getClientById);
