@@ -5,11 +5,7 @@ interface HomeLayoutProps {
 }
 
 const HomeLayout = ({ children }: HomeLayoutProps) => {
-  return (
-    <div className="h-screen bg-gray-100">
-        {children}
-    </div>
-  );
+  return <div className="h-screen bg-gray-100">{children}</div>;
 };
 
 export default HomeLayout;
