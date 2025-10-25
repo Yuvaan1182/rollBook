@@ -9,6 +9,7 @@ router.use(
 router.use(express.json());
 router.use("/auth", require("./auth.route"));
 router.use("/subs", require("./subs.route"));
+router.use("/invoices", require("./invoice.route"));
 router.use("/clients", require("./client.route"));
 
 module.exports = router;

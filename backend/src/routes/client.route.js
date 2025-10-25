@@ -1,10 +1,13 @@
-const express = require("express");
-const router = express.Router();
-const { createAuthMiddleware } = require("../middlewares/auth/auth.middleware");
-const { validate } = require("../middlewares/zod/inputValidator.middleware");
 const env = require("../config/env.config");
 
-const Client = require("../models/client/client.model");
+const express = require("express");
+const router = express.Router();
+
+const { createAuthMiddleware } = require("../middlewares/auth/auth.middleware");
+const clientSchema = require("../middlewares/zod/schemas/client.schema");
+const { validate } = require("../middlewares/zod/inputValidator.middleware");
+
+const Client = require("../models/client.model");
 const ClientService = require("../services/client/client.service");
 const ClientController = require("../controllers/client/client.controller");
 
@@ -15,12 +18,26 @@ const clientController = new ClientController(clientService);
 router.use(createAuthMiddleware({ secret: env.jwt.secret }));
 
 /** @Routes */
-// router.post("/client", clientController.createClient);
-// router.get("/clients", clientController.getClients);
-// router.post("/client", validate(), addClient);
-// router.get("/clients", validate(), getClients);
-// router.get("/client/:id", validate(), getClientById);
-// router.put("/client/:id", validate(), updateClient);
-// router.delete("/client/:id", validate(), deleteClient);
+router.post(
+  "/client",
+  validate(clientSchema.createClient, "body"),
+  clientController.createClient
+);
+
+router.get(
+  "/clients",
+  validate(clientSchema.getClients, "body"),
+  clientController.getClients
+);
+
+router.put(
+  "/client/:id",
+  validate(clientSchema.updateClient, "body"),
+  clientController.updateClient
+);
+
+router.get("/client/:id", clientController.getClient);
+
+router.delete("/client/:id", clientController.deleteClient);
 
 module.exports = router;
