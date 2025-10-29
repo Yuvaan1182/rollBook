@@ -1,6 +1,14 @@
 const Stripe = require("stripe");
 const env = require("./env.config");
 
-const stripe = new Stripe(env.payments.stripe.secretKey);
+let stripeInstance;
 
-module.exports = stripe;
+// Only initialize if key exists
+if (env?.payments?.stripe?.secretKey) {
+  stripeInstance = new Stripe(env.payments.stripe.secretKey);
+} else {
+  // In tests (no key), return a dummy placeholder
+  stripeInstance = { paymentIntents: { create: async () => ({}) } };
+}
+
+module.exports = stripeInstance;
