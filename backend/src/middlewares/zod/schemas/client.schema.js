@@ -53,12 +53,24 @@ const updateClientSchema = z.object({
   status: z.enum(["active", "lead", "inactive", "defaulter"]).optional(),
 });
 
+const deleteClientsSchema = z.object({
+  email: z.string().email().optional(),
+  phone: z
+    .string()
+    .regex(/^\d{6,14}$/, "Invalid phone number format")
+    .optional(),
+  country: z.string().max(100).optional(),
+  company: z.string().max(100).optional(),
+  status: z.enum(["active", "lead", "inactive", "defaulter"]).optional(),
+});
+
 // Combine all schemas into a single object for easy export
 const clientSchema = {
   createClient: createClientSchema,
   getClients: getClientsSchema,
   getClient: getClientSchema,
   updateClient: updateClientSchema,
+  deleteClients: deleteClientsSchema,
 };
 
 // Export all schemas in a modular way

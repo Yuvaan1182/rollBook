@@ -18,13 +18,20 @@ const clientController = new ClientController(clientService);
 router.use(createAuthMiddleware({ secret: env.jwt.secret }));
 
 /** @Routes */
+
+/** @route get all clients */
 router.get(
-  "/",
+  "/user/clients",
   validate(clientSchema.getClients, "body"),
   clientController.getClients
 );
 
-router.delete("/", clientController.deleteClients);
+/** @route delete multiple clients */
+router.delete(
+  "/user/clients",
+  validate(clientSchema.deleteClients),
+  clientController.deleteClients
+);
 
 router.post(
   "/client",
