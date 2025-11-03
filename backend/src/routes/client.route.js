@@ -22,7 +22,7 @@ router.use(createAuthMiddleware({ secret: env.jwt.secret }));
 /** @route get all clients */
 router.get(
   "/user/clients",
-  validate(clientSchema.getClients, "body"),
+  validate(clientSchema.getClients, "query"),
   clientController.getClients
 );
 
@@ -33,20 +33,24 @@ router.delete(
   clientController.deleteClients
 );
 
+/** @route create client */
 router.post(
   "/client",
-  validate(clientSchema.createClient, "body"),
+  validate(clientSchema.createClient),
   clientController.createClient
 );
 
+/** @route client info using client id */
 router.get("/client/:id", clientController.getClientById);
 
+/** @route update client info by id */
 router.put(
   "/client/:id",
-  validate(clientSchema.updateClient, "body"),
+  validate(clientSchema.updateClient),
   clientController.updateClient
 );
 
+/** @route to delete the client by id */
 router.delete("/client/:id", clientController.deleteClient);
 
 module.exports = router;

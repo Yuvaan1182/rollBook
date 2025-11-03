@@ -14,6 +14,13 @@ class ClientController {
       .forEach((fn) => (this[fn] = this[fn].bind(this)));
   }
 
+  /**
+   * @TODO: index email, phone and filter fields of client schema
+   * @param {*} req
+   * @param {*} res
+   * @param {*} next
+   * @returns
+   */
   async createClient(req, res, next) {
     try {
       const { email, phone, ...rest } = req.body;
@@ -114,7 +121,13 @@ class ClientController {
       next(err);
     }
   }
-
+  /**
+   * @TODO: Apply pagination logic
+   * @param {*} req
+   * @param {*} res
+   * @param {*} next
+   * @returns
+   */
   async getClients(req, res, next) {
     try {
       const filter = req.query || {};
