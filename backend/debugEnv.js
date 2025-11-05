@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 const { Resend } = require("resend");
-const resendEnv = require("./src/config/env").emailProviders.resend;
+const resendEnv = require("./src/config/env.config").emailProviders.resend;
 
 const resend = new Resend(resendEnv.apiKey);
 
@@ -26,6 +26,7 @@ async function printResendApiKeys() {
 
 async function printResendDomains() {
   const result = await resend.domains.list();
+  console.log("Result:", result);
 
   const data = result?.data?.data;
 
@@ -40,7 +41,7 @@ async function printResendDomains() {
       Name: key.name,
       "Created At": key.created_at,
       Status: key.status,
-      Region: key.region
+      Region: key.region,
     }))
   );
 }
