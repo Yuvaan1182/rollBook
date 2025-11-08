@@ -29,6 +29,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { IoEyeOff } from "react-icons/io5";
 import { IoEye } from "react-icons/io5";
+import { Card } from "@/components/ui/card";
 
 /** Zod Schema */
 const schema = z.object({
@@ -64,83 +65,89 @@ export const Login = () => {
   };
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)} className="min-w-full p-4">
-      <FieldGroup>
-        <FieldSet>
-          <FieldLegend>Login to your Account</FieldLegend>
-          <FieldDescription>
-            Enter your email to login to your account
-          </FieldDescription>
-          <FieldGroup>
-            <Field>
-              <FieldLabel htmlFor="user-email">User Email</FieldLabel>
-              <Input
-                {...form.register("email")}
-                id="user-email"
-                placeholder="johndoe@example.com"
-                required
-              />
-              <FieldError>{form.formState.errors.email?.message}</FieldError>
-            </Field>
-            <Field>
-              <div className="flex justify-between items-center">
-                <FieldLabel htmlFor="password">Password</FieldLabel>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <InputGroupButton
-                      variant="ghost"
-                      aria-label="Info"
-                      size="icon-xs"
-                    >
-                      <InfoIcon />
-                    </InputGroupButton>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Password must be at least 8 characters</p>
-                  </TooltipContent>
-                </Tooltip>
-              </div>
-              <InputGroup>
-                <InputGroupInput
-                  {...form.register("password")}
-                  placeholder="Enter password"
-                  type={showPassword ? "text" : "password"}
-                  aria-label={showPassword ? "Hide password" : "Show password"}
+    <Card className="w-full max-w-sm">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="min-w-full p-4">
+        <FieldGroup>
+          <FieldSet>
+            <FieldLegend>Login to your Account</FieldLegend>
+            <FieldDescription>
+              Enter your email to login to your account
+            </FieldDescription>
+            <FieldGroup>
+              <Field>
+                <FieldLabel htmlFor="user-email">User Email</FieldLabel>
+                <Input
+                  {...form.register("email")}
+                  id="user-email"
+                  placeholder="johndoe@example.com"
+                  required
                 />
-                <InputGroupAddon align="inline-end">
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => setShowPassword((prev) => !prev)}
+                <FieldError>{form.formState.errors.email?.message}</FieldError>
+              </Field>
+              <Field>
+                <div className="flex justify-between items-center">
+                  <FieldLabel htmlFor="password">Password</FieldLabel>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <InputGroupButton
+                        variant="ghost"
+                        aria-label="Info"
+                        size="icon-xs"
+                      >
+                        <InfoIcon />
+                      </InputGroupButton>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Password must be at least 8 characters</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </div>
+                <InputGroup>
+                  <InputGroupInput
+                    {...form.register("password")}
+                    placeholder="Enter password"
+                    type={showPassword ? "text" : "password"}
                     aria-label={
                       showPassword ? "Hide password" : "Show password"
                     }
-                  >
-                    {showPassword ? (
-                      <IoEyeOff className="h-4 w-4" />
-                    ) : (
-                      <IoEye className="h-4 w-4" />
-                    )}
-                  </Button>
-                </InputGroupAddon>
-              </InputGroup>
-              <FieldError>{form.formState.errors.password?.message}</FieldError>
-            </Field>
-            <Field>
-              <Button>Login</Button>
-            </Field>
-          </FieldGroup>
-        </FieldSet>
-        <FieldSeparator />
-        <FieldSet>
-          <Button>
-            <FcGoogle />
-            Google
-          </Button>
-        </FieldSet>
-      </FieldGroup>
-    </form>
+                  />
+                  <InputGroupAddon align="inline-end">
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => setShowPassword((prev) => !prev)}
+                      aria-label={
+                        showPassword ? "Hide password" : "Show password"
+                      }
+                    >
+                      {showPassword ? (
+                        <IoEyeOff className="h-4 w-4" />
+                      ) : (
+                        <IoEye className="h-4 w-4" />
+                      )}
+                    </Button>
+                  </InputGroupAddon>
+                </InputGroup>
+                <FieldError>
+                  {form.formState.errors.password?.message}
+                </FieldError>
+              </Field>
+              <Field>
+                <Button type="submit">Login</Button>
+              </Field>
+            </FieldGroup>
+          </FieldSet>
+          <FieldSeparator />
+          <FieldSet>
+            <Button variant="secondary">
+              <FcGoogle />
+              Google
+            </Button>
+          </FieldSet>
+        </FieldGroup>
+      </form>
+    </Card>
   );
 };
 
