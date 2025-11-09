@@ -19,14 +19,11 @@ describe("TopNav Component", () => {
 
     // Check for logo text
     const logo = screen.getByText("Invoxyhub");
-    expect(logo).toBeDefined();
+    expect(logo).toBeInTheDocument();
 
     // Verify the logo is a link to dashboard
     const logoLink = logo.closest("a");
-    expect(logoLink).not.toBeNull();
-    expect((logoLink as HTMLAnchorElement).getAttribute("href")).toBe(
-      "/dashboard"
-    );
+    expect(logoLink).toHaveAttribute("href", "/dashboard");
   });
 
   it("correctly renders the mode toggle", () => {
@@ -37,7 +34,7 @@ describe("TopNav Component", () => {
     );
 
     // Check if ModeToggle is rendered
-    expect(screen.getByTestId("mode-toggle")).toBeDefined();
+    expect(screen.getByTestId("mode-toggle")).toBeInTheDocument();
   });
 
   it("correctly renders the user avatar", () => {
@@ -49,7 +46,7 @@ describe("TopNav Component", () => {
 
     // Check for avatar (may be image or fallback)
     const avatar = screen.getByText("CN"); // Fallback text
-    expect(avatar).toBeDefined();
+    expect(avatar).toBeInTheDocument();
   });
 
   it("correctly renders user avatar dropdown menu", async () => {
@@ -63,13 +60,13 @@ describe("TopNav Component", () => {
 
     // Find the avatar dropdown trigger by aria-haspopup
     const avatarTrigger = container.querySelector('[aria-haspopup="menu"]');
-    expect(avatarTrigger).toBeDefined();
+    expect(avatarTrigger).toBeInTheDocument();
 
     await user.click(avatarTrigger!);
 
     // Check for dropdown menu items
-    expect(await screen.findByText("Profile")).toBeDefined();
-    expect(await screen.findByText("Logout")).toBeDefined();
+    expect(await screen.findByText("Profile")).toBeInTheDocument();
+    expect(await screen.findByText("Logout")).toBeInTheDocument();
   });
 
   it("dropdown has correct links", async () => {
@@ -87,10 +84,7 @@ describe("TopNav Component", () => {
 
     // Verify Profile link
     const profileLink = (await screen.findByText("Profile")).closest("a");
-    expect(profileLink).not.toBeNull();
-    expect((profileLink as HTMLAnchorElement).getAttribute("href")).toBe(
-      "/profile"
-    );
+    expect(profileLink).toHaveAttribute("href", "/profile");
   });
 
   it("has correct container classes and structure", () => {
@@ -101,11 +95,7 @@ describe("TopNav Component", () => {
     );
 
     const nav = container.querySelector("nav");
-    expect(nav).not.toBeNull();
-    expect(nav?.classList.contains("fixed")).toBe(true);
-    expect(nav?.classList.contains("top-0")).toBe(true);
-    expect(nav?.classList.contains("bg-background")).toBe(true);
-    expect(nav?.classList.contains("border-b")).toBe(true);
+    expect(nav).toHaveClass("fixed", "top-0", "bg-background", "border-b");
   });
 
   it("renders all main sections: logo, mode toggle, and avatar", () => {
@@ -116,13 +106,13 @@ describe("TopNav Component", () => {
     );
 
     // Logo section
-    expect(screen.getByText("Invoxyhub")).toBeDefined();
+    expect(screen.getByText("Invoxyhub")).toBeInTheDocument();
 
     // Mode toggle section
-    expect(screen.getByTestId("mode-toggle")).toBeDefined();
+    expect(screen.getByTestId("mode-toggle")).toBeInTheDocument();
 
     // Avatar section
-    expect(screen.getByText("CN")).toBeDefined();
+    expect(screen.getByText("CN")).toBeInTheDocument();
   });
 
   it("has correct layout structure with flex containers", () => {
@@ -135,8 +125,6 @@ describe("TopNav Component", () => {
     const nav = container.querySelector("nav");
 
     // Nav should have flex and justify-between
-    expect(nav).not.toBeNull();
-    expect(nav?.classList.contains("flex")).toBe(true);
-    expect(nav?.classList.contains("justify-between")).toBe(true);
+    expect(nav).toHaveClass("flex", "justify-between");
   });
 });
