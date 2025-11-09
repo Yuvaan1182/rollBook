@@ -8,18 +8,21 @@ import ErrorBoundary from "./components/feedback/ErrorBoundary";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { BrowserRouter as Router } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ErrorBoundary>
-      <ThemeProvider>
-        {/* <Provider store={store}> */}
-        {/* <PersistGate loading={null} persistor={persistor}> */}
-        <ToastContainer position="top-right" autoClose={3000} />
-        <App />
-        {/* </PersistGate> */}
-        {/* </Provider> */}
-      </ThemeProvider>
+      {/* <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}> */}
+      <Router>
+        <ThemeProvider>
+          <App />
+          <ToastContainer position="top-right" autoClose={3000} />
+        </ThemeProvider>
+      </Router>
+      {/* </PersistGate>
+    </Provider> */}
     </ErrorBoundary>
   </React.StrictMode>
 );

@@ -79,7 +79,7 @@ export const Login = () => {
                 <Input
                   {...form.register("email")}
                   id="user-email"
-                  placeholder="johndoe@example.com"
+                  placeholder="Enter your email"
                   required
                 />
                 <FieldError>{form.formState.errors.email?.message}</FieldError>
