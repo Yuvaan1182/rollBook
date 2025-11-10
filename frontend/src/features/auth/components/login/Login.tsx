@@ -30,6 +30,7 @@ import { useState } from "react";
 import { IoEyeOff } from "react-icons/io5";
 import { IoEye } from "react-icons/io5";
 import { Card } from "@/components/ui/card";
+import ForgotPassword from "../ForgotPassword";
 
 /** Zod Schema */
 const schema = z.object({
@@ -129,6 +130,9 @@ export const Login = () => {
                     </Button>
                   </InputGroupAddon>
                 </InputGroup>
+                <FieldDescription className="text-end text-blue-400">
+                  <ForgotPassword />
+                </FieldDescription>
                 <FieldError>
                   {form.formState.errors.password?.message}
                 </FieldError>
