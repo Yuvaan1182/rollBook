@@ -6,6 +6,8 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  DialogOverlay,
+  DialogPortal,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
@@ -46,31 +48,34 @@ const ForgotPassword = () => {
             forgot password?
           </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>Forgot Password?</DialogTitle>
-            <DialogDescription>
-              Enter your registered email here. Click submit when you&apos;re
-              done.
-            </DialogDescription>
-          </DialogHeader>
-          <Field>
-            <FieldLabel htmlFor="user-email">User Email</FieldLabel>
-            <Input
-              {...form.register("email")}
-              id="user-email"
-              placeholder="Enter your email"
-              required
-            />
-            <FieldError>{form.formState.errors.email?.message}</FieldError>
-          </Field>
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button variant="outline">Cancel</Button>
-            </DialogClose>
-            <Button type="submit">Submit</Button>
-          </DialogFooter>
-        </DialogContent>
+        <DialogPortal>
+          <DialogOverlay className="fixed inset-0 bg-black/40 backdrop-blur-md" />
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>Forgot Password?</DialogTitle>
+              <DialogDescription>
+                Enter your registered email here. Click submit when you&apos;re
+                done.
+              </DialogDescription>
+            </DialogHeader>
+            <Field>
+              <FieldLabel htmlFor="user-email">User Email</FieldLabel>
+              <Input
+                {...form.register("email")}
+                id="user-email"
+                placeholder="Enter your email"
+                required
+              />
+              <FieldError>{form.formState.errors.email?.message}</FieldError>
+            </Field>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button variant="outline">Cancel</Button>
+              </DialogClose>
+              <Button type="submit">Submit</Button>
+            </DialogFooter>
+          </DialogContent>
+        </DialogPortal>
       </form>
     </Dialog>
   );
