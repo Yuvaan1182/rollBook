@@ -1,11 +1,7 @@
 import { Button } from "@/components/ui/button";
 import {
-  Field,
-  FieldDescription,
   FieldError,
   FieldGroup,
-  FieldLabel,
-  FieldLegend,
   FieldSeparator,
   FieldSet,
 } from "@/components/ui/field";
@@ -29,8 +25,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { IoEyeOff } from "react-icons/io5";
 import { IoEye } from "react-icons/io5";
-import { Card } from "@/components/ui/card";
-import ForgotPassword from "../ForgotPassword";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Link } from "react-router-dom";
 
 /** Zod Schema */
 const schema = z.object({
@@ -67,16 +70,18 @@ export const Login = () => {
 
   return (
     <Card className="w-full max-w-sm">
-      <form onSubmit={form.handleSubmit(onSubmit)} className="min-w-full p-4">
-        <FieldGroup>
-          <FieldSet>
-            <FieldLegend>Login to your Account</FieldLegend>
-            <FieldDescription>
-              Enter your email to login to your account
-            </FieldDescription>
-            <FieldGroup>
-              <Field>
-                <FieldLabel htmlFor="user-email">User Email</FieldLabel>
+      <CardHeader>
+        <CardTitle>Login to your Account</CardTitle>
+        <CardDescription>
+          Enter your email to login to your account
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <FieldGroup>
+            <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-2">
+                <Label htmlFor="user-email">Email</Label>
                 <Input
                   {...form.register("email")}
                   id="user-email"
@@ -84,24 +89,32 @@ export const Login = () => {
                   required
                 />
                 <FieldError>{form.formState.errors.email?.message}</FieldError>
-              </Field>
-              <Field>
-                <div className="flex justify-between items-center">
-                  <FieldLabel htmlFor="password">Password</FieldLabel>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <InputGroupButton
-                        variant="ghost"
-                        aria-label="Info"
-                        size="icon-xs"
-                      >
-                        <InfoIcon />
-                      </InputGroupButton>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>Password must be at least 8 characters</p>
-                    </TooltipContent>
-                  </Tooltip>
+              </div>
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="password">
+                    Password
+                    <Tooltip>
+                      <TooltipTrigger asChild className="-ml-2">
+                        <InputGroupButton
+                          variant="ghost"
+                          aria-label="Info"
+                          size="icon-xs"
+                        >
+                          <InfoIcon />
+                        </InputGroupButton>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Password must be at least 8 characters</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </Label>
+                  <Link
+                    to="/forgot-password"
+                    className="text-sm font-light underline-offset-4 hover:underline"
+                  >
+                    Forgot Password?
+                  </Link>
                 </div>
                 <InputGroup>
                   <InputGroupInput
@@ -130,27 +143,24 @@ export const Login = () => {
                     </Button>
                   </InputGroupAddon>
                 </InputGroup>
-                <FieldDescription className="text-end text-blue-400">
-                  <ForgotPassword />
-                </FieldDescription>
                 <FieldError>
                   {form.formState.errors.password?.message}
                 </FieldError>
-              </Field>
-              <Field>
-                <Button type="submit">Login</Button>
-              </Field>
-            </FieldGroup>
-          </FieldSet>
-          <FieldSeparator />
-          <FieldSet>
-            <Button variant="secondary">
-              <FcGoogle />
-              Google
-            </Button>
-          </FieldSet>
-        </FieldGroup>
-      </form>
+              </div>
+            </div>
+            <FieldSet>
+              <Button type="submit">Login</Button>
+            </FieldSet>
+            <FieldSeparator />
+            <FieldSet>
+              <Button variant="secondary">
+                <FcGoogle />
+                Google
+              </Button>
+            </FieldSet>
+          </FieldGroup>
+        </form>
+      </CardContent>
     </Card>
   );
 };
