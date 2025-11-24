@@ -9,6 +9,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { BrowserRouter as Router } from "react-router-dom";
+import { SidebarProvider } from "./components/ui/sidebar";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -17,7 +18,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <PersistGate loading={null} persistor={persistor}> */}
       <Router>
         <ThemeProvider>
-          <App />
+          <SidebarProvider>
+            <App />
+          </SidebarProvider>
           <ToastContainer position="top-right" autoClose={3000} />
         </ThemeProvider>
       </Router>

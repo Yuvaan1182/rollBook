@@ -38,15 +38,15 @@ const TopNav = () => {
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="mt-1" align="end">
+            <DropdownMenuContent sideOffset={10}>
               <DropdownMenuItem>
                 <Link to="/profile" className="flex items-center gap-2">
-                  <UserCircleIcon className="text-primary" size={24} />
+                  <UserCircleIcon className="mr-2 text-primary" size={24} />
                   Profile
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <IoLogOutOutline className="text-destructive" size={24} />
+              <DropdownMenuItem variant="destructive">
+                <IoLogOutOutline className="mr-2" size={24} />
                 Logout
               </DropdownMenuItem>
             </DropdownMenuContent>

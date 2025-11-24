@@ -27,8 +27,10 @@ import { IoEyeOff } from "react-icons/io5";
 import { IoEye } from "react-icons/io5";
 import {
   Card,
+  CardAction,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -152,15 +154,20 @@ export const Login = () => {
               <Button type="submit">Login</Button>
             </FieldSet>
             <FieldSeparator />
-            <FieldSet>
-              <Button variant="secondary">
-                <FcGoogle />
-                Google
-              </Button>
-            </FieldSet>
           </FieldGroup>
         </form>
       </CardContent>
+      <CardFooter className="justify-between">
+        <Button variant="secondary">
+          <FcGoogle />
+          Google
+        </Button>
+        <CardAction>
+          <Button variant="link">
+            <Link to="/register">Signup</Link>
+          </Button>
+        </CardAction>
+      </CardFooter>
     </Card>
   );
 };
