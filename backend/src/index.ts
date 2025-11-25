@@ -1,1 +1,3 @@
-console.log("Invoxy backend started!");
+import startServer from "./app/server";
+
+startServer();
